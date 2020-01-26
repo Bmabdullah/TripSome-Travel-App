@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n9q-RM-gcD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8be-Kp-F9e">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -318,7 +318,7 @@
                                                 </state>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tripsome-01 1" translatesAutoresizingMaskIntoConstraints="NO" id="D8i-FC-hOf">
-                                                <rect key="frame" x="20" y="177" width="140" height="34"/>
+                                                <rect key="frame" x="20" y="177" width="140.00000000000003" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="ipw-87-o2g"/>
                                                     <constraint firstAttribute="width" constant="140" id="z3o-JE-49U"/>
@@ -432,7 +432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686" y="-175"/>
+            <point key="canvasLocation" x="1225" y="-670"/>
         </scene>
         <!--Place View Controller-->
         <scene sceneID="90c-u5-twa">
@@ -549,7 +549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjr-L7-u4L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3037.68115942029" y="89.732142857142847"/>
+            <point key="canvasLocation" x="2601" y="-374"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="Vcp-F6-84J">
@@ -563,7 +563,7 @@
                                 <rect key="frame" x="0.0" y="44.000000000000014" width="414" height="245.33333333333337"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tripsome-01 1" translatesAutoresizingMaskIntoConstraints="NO" id="yv9-vJ-tOR">
-                                        <rect key="frame" x="127" y="97.666666666666657" width="160" height="50"/>
+                                        <rect key="frame" x="126.99999999999999" y="97.666666666666657" width="160.00000000000003" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="hFF-gl-5pq"/>
                                             <constraint firstAttribute="width" constant="160" id="mtB-AF-QT0"/>
@@ -647,12 +647,12 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPJ-xg-2o9">
                                         <rect key="frame" x="40" y="40" width="334" height="45"/>
-                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="27"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="signInButton:" destination="8be-Kp-F9e" eventType="touchUpInside" id="Nmd-Wt-SEs"/>
+                                            <action selector="signInButton:" destination="8be-Kp-F9e" eventType="touchUpInside" id="hRe-VQ-Maj"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don’t have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-Q2-hpx">
@@ -705,12 +705,14 @@
                     <connections>
                         <outlet property="loginEmailTextField" destination="DcV-Xh-rRM" id="OPz-di-fTo"/>
                         <outlet property="loginPassTextField" destination="WEQ-44-Qjg" id="4hP-ou-gBt"/>
+                        <outlet property="signInButton" destination="NPJ-xg-2o9" id="OaB-Xc-Q42"/>
                         <segue destination="n9q-RM-gcD" kind="presentation" identifier="signintosignup" modalPresentationStyle="fullScreen" id="MGk-tL-gI5"/>
+                        <segue destination="iuU-pR-LIs" kind="presentation" identifier="signintohome" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="h6z-p0-wgF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wxv-Jh-n9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="-70"/>
+            <point key="canvasLocation" x="-1035" y="-350"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="XwS-TR-xNV">
@@ -724,7 +726,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="268.66666666666669"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tripsome-01 1" translatesAutoresizingMaskIntoConstraints="NO" id="m7E-sq-LZL">
-                                        <rect key="frame" x="127" y="109.33333333333334" width="160" height="50"/>
+                                        <rect key="frame" x="126.99999999999999" y="109.33333333333334" width="160.00000000000003" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="RY1-3q-iDg"/>
                                             <constraint firstAttribute="width" constant="160" id="lGV-Ab-RNJ"/>
@@ -881,12 +883,12 @@
                     </view>
                     <connections>
                         <outlet property="signUpButton" destination="k0M-EY-XND" id="ri1-oK-9Wi"/>
-                        <segue destination="8be-Kp-F9e" kind="presentation" identifier="signuptosignin" modalPresentationStyle="fullScreen" id="gO0-o0-n2l"/>
+                        <segue destination="8be-Kp-F9e" kind="presentation" identifier="signuptosignin" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="gO0-o0-n2l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcT-0s-hUn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="-94"/>
+            <point key="canvasLocation" x="-125" y="-350"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="75B-aD-m4e">
@@ -904,7 +906,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rb8-M3-Zjv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="-139"/>
+            <point key="canvasLocation" x="642" y="-697"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="Dqp-K8-1mf">
@@ -1014,7 +1016,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovW-sY-BJz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3729" y="35"/>
+            <point key="canvasLocation" x="3459" y="-524"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mOc-ff-kBv">
@@ -1032,7 +1034,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9kx-uE-30b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2375" y="68"/>
+            <point key="canvasLocation" x="1952" y="-374"/>
         </scene>
     </scenes>
     <resources>
