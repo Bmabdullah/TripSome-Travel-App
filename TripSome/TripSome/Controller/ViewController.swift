@@ -14,10 +14,23 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //humburger menu
     @IBOutlet weak var hiddenView: UIView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var sloganLabel: UILabel!
     
+    @IBOutlet weak var bangladeshButton: UIButton!
+    @IBOutlet weak var visitedPlaceButton: UIButton!
+    @IBOutlet weak var travelTipsButton: UIButton!
     
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var privecyButton: UIButton!
+    @IBOutlet weak var conditionButton: UIButton!
     
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var signOutButton: UIButton!
     
+    // page control
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var divitionCOllectionView: UICollectionView!
@@ -40,13 +53,13 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     // variables for counter
     var timer = Timer()
     var counter = 0
-    
     var index = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         //humburger menu
         hiddenView.isHidden = true
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
@@ -56,22 +69,18 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         // slider controll
         pageController.numberOfPages = imgArr.count
         pageController.currentPage = 0
-        
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
+        
+        //side menu function call
+        sideMenu()
+        
     }
     
     
     
     
-    //humburger menu
-    
-    @objc func handleSwipe(sender: UISwipeGestureRecognizer){
-        if hiddenView.isHidden == false{
-            hiddenView.isHidden = true
-        }
-    }
 
       
 
@@ -168,9 +177,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //cell data sending in collectionview
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         //sendinng data to first collection view
-        
-        
         if collectionView == sliderCollectionView{
             let cell = sliderCollectionView.dequeueReusableCell(withReuseIdentifier:"SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
             cell.sliderImageView.image = imgArr[indexPath.row]
@@ -212,6 +220,23 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             }
             return cell
         }
+    }
+    
+    
+    
+    //humburger menu swipe out function
+    @objc func handleSwipe(sender: UISwipeGestureRecognizer){
+        if hiddenView.isHidden == false{
+            hiddenView.isHidden = true
+        }
+    }
+    
+    // side menu function
+    func sideMenu(){
+        profileImageView.layer.cornerRadius = 60
+        bangladeshButton.layer.cornerRadius = 20
+        visitedPlaceButton.layer.borderColor = UIColor.red.cgColor
+        visitedPlaceButton.layer.borderWidth = 2
     }
 
 }

@@ -17,14 +17,19 @@ class signInViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    @IBOutlet weak var loginEmailTextField: UITextField!
+    @IBOutlet weak var loginPassTextField: UITextField!
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func signInButton(_ sender: Any) {
+        
+        print("SIgned In Succesfully")
     }
-    */
-
+    
+    @IBAction func signUpPageButton(_ sender: Any) {
+       // let vc = signUpViewController()
+        //vc.
+        performSegue(withIdentifier: "signintosignup", sender: self)
+    }
+    
 }

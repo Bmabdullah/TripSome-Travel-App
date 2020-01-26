@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85147A1D23DD54B600F4721C /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85147A1C23DD54B600F4721C /* signUpViewController.swift */; };
 		85741F1123D969DC004E0841 /* signInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85741F1023D969DC004E0841 /* signInViewController.swift */; };
 		85C118CC23CF420D005F32E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C118CB23CF420D005F32E0 /* AppDelegate.swift */; };
 		85C118CE23CF420D005F32E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C118CD23CF420D005F32E0 /* SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		85147A1C23DD54B600F4721C /* signUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		85741F1023D969DC004E0841 /* signInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInViewController.swift; sourceTree = "<group>"; };
 		85C118C823CF420D005F32E0 /* TripSome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripSome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C118CB23CF420D005F32E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				85741F1023D969DC004E0841 /* signInViewController.swift */,
+				85147A1C23DD54B600F4721C /* signUpViewController.swift */,
 				85C118CF23CF420D005F32E0 /* ViewController.swift */,
 				85C118E923CF6963005F32E0 /* PlacesTableViewCell.swift */,
 				85C118EB23CF7031005F32E0 /* DetailsViewController.swift */,
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85147A1D23DD54B600F4721C /* signUpViewController.swift in Sources */,
 				85C118E823CF62FA005F32E0 /* PlaceViewController.swift in Sources */,
 				85C118E623CF4A8B005F32E0 /* DivitionCollectionViewCell.swift in Sources */,
 				85C118EA23CF6963005F32E0 /* PlacesTableViewCell.swift in Sources */,
