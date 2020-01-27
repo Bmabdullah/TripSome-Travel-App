@@ -26,10 +26,15 @@ class signUpViewController: UIViewController {
         performSegue(withIdentifier: "signuptosignin", sender: self)
     }
     
-    func buttonwork(){
-        signUpButton.layer.borderColor = UIColor.green.cgColor
-        signUpButton.layer.borderWidth = 2
-        signUpButton.layer.cornerRadius = 30
-    }
+  
     
+}
+
+extension signUpViewController{
+    
+    func buttonwork(){
+          signUpButton.layer.borderColor = UIColor.green.cgColor
+          signUpButton.layer.borderWidth = 2
+          signUpButton.layer.cornerRadius = 30
+      }
 }

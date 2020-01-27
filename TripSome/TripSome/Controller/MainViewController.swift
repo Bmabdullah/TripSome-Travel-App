@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+class MainViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     @IBOutlet var mainView: UIView!
     
@@ -31,8 +31,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet weak var signOutButton: UIButton!
     
     // page control
-    @IBOutlet weak var pageController: UIPageControl!
-    @IBOutlet weak var sliderCollectionView: UICollectionView!
+
     @IBOutlet weak var divitionCOllectionView: UICollectionView!
     
     // Variables
@@ -47,8 +46,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     var mymensingh = ["ahsan monjil","sonarga","jatiyo songsodh","zoo","savar"]
     var rajshahi = ["majar","tea garden","lakkatura hill","eco park","tanguar hawr","srimangal","lawachora"]
     var khulna = ["ahsan monjil","sonarga","jatiyo songsodh","zoo","savar"]
-    var barishal = ["majar","tea garden","lakkatura hill","eco park","tanguar hawr","srimangal","lawachora"]
+    var barishal:[String] = ["majar","tea garden", "jfdhg"]
     
+    var divitionCounter = ["7","5","6","3","10","20","10","5"]
     
     // variables for counter
     var timer = Timer()
@@ -66,23 +66,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         leftSwipe.direction = .left
         mainView.addGestureRecognizer(leftSwipe)
         
-        // slider controll
-        pageController.numberOfPages = imgArr.count
-        pageController.currentPage = 0
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-        }
-        
         //side menu function call
         sideMenu()
-        
+        navigationDesign()
     }
-    
-    
-    
-    
-
-      
+  
 
     @IBAction func tapNavButton(_ sender: Any) {
         
@@ -93,51 +81,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             hiddenView.isHidden = true
         }
     }
-    
-    
-    
-   
-    
-    
-    
-    // function for image changing
-    
-    @objc func changeImage()
-    {
-        if counter < imgArr.count{
-            let index = IndexPath.init(item: counter, section: 0)
-            self.sliderCollectionView.scrollToItem(at: index , at: .centeredHorizontally, animated: true)
-            pageController.currentPage = counter
-            counter += 1
-        }
-        else{
-            counter = 0
-            let index = IndexPath.init(item: counter, section: 0)
-            self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
-            pageController.currentPage = counter
-        }
-    }
-    
+
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        if collectionView == sliderCollectionView{
-            
-            
-            let noOfCellsInRow = 1
-
-            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-
-            let totalSpace = flowLayout.sectionInset.left
-                + flowLayout.sectionInset.right
-                + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
-
-            let size = Int((sliderCollectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-
-            return CGSize(width: size, height: size)
-
-        }
-        else{
             let noOfCellsInRow = 2
 
             let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -151,7 +98,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 
             return CGSize(width: size, height: hsize)
 
-        }
+        
 
     }
     
@@ -178,48 +125,22 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //cell data sending in collectionview
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        //sendinng data to first collection view
-        if collectionView == sliderCollectionView{
-            let cell = sliderCollectionView.dequeueReusableCell(withReuseIdentifier:"SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
-            cell.sliderImageView.image = imgArr[indexPath.row]
-            
-            return cell
-        }
-            // sending onto 2nd collectionview
-        else{
-            let cell = divitionCOllectionView.dequeueReusableCell(withReuseIdentifier:"DivitionCollectionViewCell", for: indexPath) as! DivitionCollectionViewCell
+        var mycustomCell = UICollectionViewCell()
+  
+            let cell:DivitionCollectionViewCell = divitionCOllectionView.dequeueReusableCell(withReuseIdentifier:"DivitionCollectionViewCell", for: indexPath) as! DivitionCollectionViewCell
+           // cell.divisionCollectionCellConfigure(with modelobj[indexPath.row])
             cell.divitionImageView.image = imgArr[indexPath.row]
             cell.divitionNameLabel.text = divNameArr[indexPath.row]
             //    cell.totalPlaceLabel.text = "\(divNameArr[indexPath.row].count) Places > "
             cell.contentView.layer.cornerRadius = 10
+      
+         
+            cell.totalPlaceLabel.text = "\(divitionCounter[indexPath.row]) Places > "
             
-            
-            if indexPath.row == 0 {
-                cell.totalPlaceLabel.text = "\(barishal.count) Places > "
-            }
-            if indexPath.row == 1 {
-                cell.totalPlaceLabel.text = "\(chittagonj.count) Places > "
-            }
-            if indexPath.row == 2 {
-                cell.totalPlaceLabel.text = "\(dhaka.count) Places > "
-            }
-            if indexPath.row == 3 {
-                cell.totalPlaceLabel.text = "\(khulna.count) Places > "
-            }
-            if indexPath.row == 4 {
-                cell.totalPlaceLabel.text = "\(rajshahi.count) Places > "
-            }
-            if indexPath.row == 5 {
-                cell.totalPlaceLabel.text = "\(sylhet.count) Places > "
-            }
-            if indexPath.row == 6 {
-                cell.totalPlaceLabel.text = "\(rangpur.count) Places > "
-            }
-            if indexPath.row == 7 {
-                cell.totalPlaceLabel.text = "\(mymensingh.count) Places > "
-            }
-            return cell
-        }
+           mycustomCell = cell
+           return mycustomCell
+        
+        
     }
     
     
@@ -237,6 +158,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         bangladeshButton.layer.cornerRadius = 20
         visitedPlaceButton.layer.borderColor = UIColor.red.cgColor
         visitedPlaceButton.layer.borderWidth = 2
+    }
+    func navigationDesign(){
+        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
     }
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class signInViewController: UIViewController {
+class signInViewController: UIViewController,UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,20 @@ class signInViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         buttonWork()
+        self.loginEmailTextField.delegate = self
+        self.loginPassTextField.delegate = self
+        
+         }
+
+         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+             self.view.endEditing(true)
+            if textField == loginPassTextField{
+            buttonAction()
     }
+             return false
+         }
+   // textField
+    
     
 
     @IBOutlet weak var loginEmailTextField: UITextField!
@@ -30,38 +43,11 @@ class signInViewController: UIViewController {
     
 
     @IBAction func signInButton(_ sender: Any) {
-        if loginEmailTextField.text == email && loginPassTextField.text == pass
-        {
-            performSegue(withIdentifier: "signintohome", sender: self)
-                  print("SIgned In Succesfully")
-        }
-        else{
-            var message = ""
-            if loginEmailTextField.text == email && loginPassTextField.text != pass{
-                message = " please check your password "
-            }
-            else if loginEmailTextField.text != email && loginPassTextField.text == pass{
-                
-                message = " please check your email "
-            }
-            else{
-                message = " please check your email and Password "
-            }
-            
-            
-            let alert = UIAlertController(title: "Wrong Inormation", message: "\(message)", preferredStyle: .alert)
-            //alert.addAction(title="click",sty)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            //self.(alert, animated: true, completion: nil)
-            self.present(alert, animated: true, completion: nil)
-            
-        }
-      
+        buttonAction()
     }
     
     @IBAction func signUpPageButton(_ sender: Any) {
-       // let vc = signUpViewController()
-        //vc.
+       
         performSegue(withIdentifier: "signintosignup", sender: self)
     }
     
@@ -69,6 +55,36 @@ class signInViewController: UIViewController {
         signInButton.layer.borderColor = UIColor.green.cgColor
         signInButton.layer.borderWidth = 2
         signInButton.layer.cornerRadius = 20
+       
+        
+    }
+    func buttonAction(){
+        if loginEmailTextField.text == email && loginPassTextField.text == pass
+                 {
+                     performSegue(withIdentifier: "signintohome", sender: self)
+                           print("SIgned In Succesfully")
+                 }
+                 else{
+                     var message = ""
+                     if loginEmailTextField.text == email && loginPassTextField.text != pass{
+                         message = " please check your password "
+                     }
+                     else if loginEmailTextField.text != email && loginPassTextField.text == pass{
+                         
+                         message = " please check your email "
+                     }
+                     else{
+                         message = " please check your email and Password "
+                     }
+                     
+                     
+                     let alert = UIAlertController(title: "Wrong Inormation", message: "\(message)", preferredStyle: .alert)
+                     //alert.addAction(title="click",sty)
+                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                     //self.(alert, animated: true, completion: nil)
+                     self.present(alert, animated: true, completion: nil)
+                     
+                 }
     }
     
     

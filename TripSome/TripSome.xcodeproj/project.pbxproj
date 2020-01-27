@@ -11,7 +11,7 @@
 		85741F1123D969DC004E0841 /* signInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85741F1023D969DC004E0841 /* signInViewController.swift */; };
 		85C118CC23CF420D005F32E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C118CB23CF420D005F32E0 /* AppDelegate.swift */; };
 		85C118CE23CF420D005F32E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C118CD23CF420D005F32E0 /* SceneDelegate.swift */; };
-		85C118D023CF420D005F32E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C118CF23CF420D005F32E0 /* ViewController.swift */; };
+		85C118D023CF420D005F32E0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C118CF23CF420D005F32E0 /* MainViewController.swift */; };
 		85C118D323CF420D005F32E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C118D123CF420D005F32E0 /* Main.storyboard */; };
 		85C118D523CF420E005F32E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C118D423CF420E005F32E0 /* Assets.xcassets */; };
 		85C118D823CF420E005F32E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C118D623CF420E005F32E0 /* LaunchScreen.storyboard */; };
@@ -26,9 +26,9 @@
 		85147A1C23DD54B600F4721C /* signUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		85741F1023D969DC004E0841 /* signInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInViewController.swift; sourceTree = "<group>"; };
 		85C118C823CF420D005F32E0 /* TripSome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripSome.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		85C118CB23CF420D005F32E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		85C118CD23CF420D005F32E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		85C118CF23CF420D005F32E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85C118CB23CF420D005F32E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Model/AppDelegate.swift; sourceTree = "<group>"; };
+		85C118CD23CF420D005F32E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = Model/SceneDelegate.swift; sourceTree = "<group>"; };
+		85C118CF23CF420D005F32E0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		85C118D223CF420D005F32E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85C118D423CF420E005F32E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85C118D723CF420E005F32E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +51,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		853DD96523DEB464002F8ADE /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				85C118CD23CF420D005F32E0 /* SceneDelegate.swift */,
+				85C118CB23CF420D005F32E0 /* AppDelegate.swift */,
+			);
+			name = SupportFiles;
+			sourceTree = "<group>";
+		};
+		853DD96623DEE78F002F8ADE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				85C118D623CF420E005F32E0 /* LaunchScreen.storyboard */,
+				85C118D123CF420D005F32E0 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		85C118BF23CF420D005F32E0 = {
 			isa = PBXGroup;
 			children = (
@@ -70,12 +88,11 @@
 		85C118CA23CF420D005F32E0 /* TripSome */ = {
 			isa = PBXGroup;
 			children = (
-				85C118D123CF420D005F32E0 /* Main.storyboard */,
-				85C118D623CF420E005F32E0 /* LaunchScreen.storyboard */,
+				853DD96623DEE78F002F8ADE /* View */,
+				853DD96523DEB464002F8ADE /* SupportFiles */,
 				85C118E023CF4A09005F32E0 /* Model */,
-				85C118E123CF4A12005F32E0 /* View */,
 				85C118DF23CF49F1005F32E0 /* Controller */,
-				85C118E223CF4A1B005F32E0 /* Others */,
+				85C118E223CF4A1B005F32E0 /* ImagesAssect */,
 				85C118D923CF420E005F32E0 /* Info.plist */,
 			);
 			path = TripSome;
@@ -86,7 +103,7 @@
 			children = (
 				85741F1023D969DC004E0841 /* signInViewController.swift */,
 				85147A1C23DD54B600F4721C /* signUpViewController.swift */,
-				85C118CF23CF420D005F32E0 /* ViewController.swift */,
+				85C118CF23CF420D005F32E0 /* MainViewController.swift */,
 				85C118E923CF6963005F32E0 /* PlacesTableViewCell.swift */,
 				85C118EB23CF7031005F32E0 /* DetailsViewController.swift */,
 				85C118E723CF62F9005F32E0 /* PlaceViewController.swift */,
@@ -99,25 +116,16 @@
 		85C118E023CF4A09005F32E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				85C118CB23CF420D005F32E0 /* AppDelegate.swift */,
-				85C118CD23CF420D005F32E0 /* SceneDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		85C118E123CF4A12005F32E0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		85C118E223CF4A1B005F32E0 /* Others */ = {
+		85C118E223CF4A1B005F32E0 /* ImagesAssect */ = {
 			isa = PBXGroup;
 			children = (
 				85C118D423CF420E005F32E0 /* Assets.xcassets */,
 			);
-			path = Others;
+			path = ImagesAssect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +204,7 @@
 				85C118E623CF4A8B005F32E0 /* DivitionCollectionViewCell.swift in Sources */,
 				85C118EA23CF6963005F32E0 /* PlacesTableViewCell.swift in Sources */,
 				85C118EC23CF7031005F32E0 /* DetailsViewController.swift in Sources */,
-				85C118D023CF420D005F32E0 /* ViewController.swift in Sources */,
+				85C118D023CF420D005F32E0 /* MainViewController.swift in Sources */,
 				85C118CC23CF420D005F32E0 /* AppDelegate.swift in Sources */,
 				85C118CE23CF420D005F32E0 /* SceneDelegate.swift in Sources */,
 				85741F1123D969DC004E0841 /* signInViewController.swift in Sources */,

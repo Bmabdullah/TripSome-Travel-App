@@ -11,7 +11,7 @@ import UIKit
 class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     
-    @IBOutlet weak var divLabel: UILabel!
+
     
     @IBOutlet weak var placeTableView: UITableView!
     
@@ -19,16 +19,15 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
     var dhkArr = ["Ahsan Monjil","lebaration war museum","National Assembly","lalbagh fort","National Zoo"]
     var dhkImgArr = [#imageLiteral(resourceName: "Rectangle 13"),#imageLiteral(resourceName: "Rectangle 16"),#imageLiteral(resourceName: "Rectangle 14"),#imageLiteral(resourceName: "Rectangle 11"),#imageLiteral(resourceName: "Rectangle 17")]
-    
-    
-    
+
     var dflt = ["defualt"]
     var dfltImg = [#imageLiteral(resourceName: "Rectangle 10")]
     
     var arr : [ String ] = []
     var imgArr : [ UIImage ] = []
     
- 
+    var iscolupse = false
+    var selectedIndex = -1
   
     
     override func viewDidLoad() {
@@ -39,6 +38,9 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         arrayChange()
         
+        //placeTableView.estimatedRowHeight = 500
+       // placeTableView.rowHeight = UITableView.automaticDimension
+        self.navigationItem.title = "\(receved)"
     
     }
     
@@ -68,16 +70,45 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.placeNameLabel.text = arr[indexPath.row]
             cell.placeImageView.image = imgArr[indexPath.row]
         
+        cell.layer.backgroundColor = UIColor.gray.cgColor
+        
+//        if [indexPath.row] % 2 == 0{
+//            cell.layer.backgroundColor = UIColor.red.cgColor
+//        }
+        
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "DetailsViewController") as! DetailsViewController
-         
-         self.navigationController?.pushViewController(vc, animated: true)
-        vc.receved = arr[indexPath.row]
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if  self.selectedIndex == indexPath.row && self.iscolupse == true {
+                   
+                       return 230  
+                   }
+              
+                   else{
+                       
+                       return 60
+                   }
     }
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+               tableView.deselectRow(at: indexPath, animated: true)
+               if selectedIndex != indexPath.row{
+                   self.iscolupse = true
+                print(1)
+               }
+               else{
+                   self.iscolupse = true
+                        let vc = storyboard?.instantiateViewController(identifier: "DetailsViewController") as! DetailsViewController
+                
+                         self.navigationController?.pushViewController(vc, animated: false)
+                        vc.receved = arr[indexPath.row]
+                print(2)
+               }
+               self.selectedIndex = indexPath.row
+               tableView.reloadRows(at: [indexPath], with: .automatic)
+           }
 
 
 }

@@ -15,5 +15,8 @@ class DivitionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var totalPlaceLabel: UILabel!
     @IBOutlet weak var cellView: UIView!
     
+   // func divisionCollectionCellConfigure(with json:ModelName) {
+//      
+//    }
     
 }
