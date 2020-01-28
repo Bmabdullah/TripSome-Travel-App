@@ -18,14 +18,19 @@ class signInViewController: UIViewController,UITextFieldDelegate {
         buttonWork()
         self.loginEmailTextField.delegate = self
         self.loginPassTextField.delegate = self
+        loginEmailTextField.becomeFirstResponder()
         
          }
 
          func textFieldShouldReturn(_ textField: UITextField) -> Bool {
              self.view.endEditing(true)
+            loginPassTextField.becomeFirstResponder()
             if textField == loginPassTextField{
+                
             buttonAction()
+                
     }
+            
              return false
          }
    // textField

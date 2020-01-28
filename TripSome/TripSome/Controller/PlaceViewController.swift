@@ -28,6 +28,8 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     var iscolupse = false
     var selectedIndex = -1
+    
+    var tableIndexforColor : Int = 0
   
     
     override func viewDidLoad() {
@@ -70,11 +72,13 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.placeNameLabel.text = arr[indexPath.row]
             cell.placeImageView.image = imgArr[indexPath.row]
         
-        cell.layer.backgroundColor = UIColor.gray.cgColor
-        
-//        if [indexPath.row] % 2 == 0{
-//            cell.layer.backgroundColor = UIColor.red.cgColor
-//        }
+        tableIndexforColor = Int(indexPath.row)
+        if tableIndexforColor % 2 == 0{
+            cell.layer.backgroundColor = UIColor.lightText.cgColor
+        }
+        else{
+            cell.layer.backgroundColor = UIColor.lightGray.cgColor
+        }
         
         
         return cell
@@ -84,12 +88,12 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         if  self.selectedIndex == indexPath.row && self.iscolupse == true {
                    
-                       return 230  
+                       return 235
                    }
               
                    else{
                        
-                       return 60
+                       return 58
                    }
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

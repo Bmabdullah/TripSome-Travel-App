@@ -160,7 +160,7 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         visitedPlaceButton.layer.borderWidth = 2
     }
     func navigationDesign(){
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.barTintColor = UIColor.systemGreen
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
     }
