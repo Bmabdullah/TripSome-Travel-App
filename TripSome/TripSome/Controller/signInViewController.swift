@@ -56,18 +56,17 @@ class signInViewController: UIViewController,UITextFieldDelegate {
         performSegue(withIdentifier: "signintosignup", sender: self)
     }
     
-    func buttonWork(){
-        signInButton.layer.borderColor = UIColor.green.cgColor
-        signInButton.layer.borderWidth = 2
-        signInButton.layer.cornerRadius = 20
-       
-        
-    }
     func buttonAction(){
         if loginEmailTextField.text == email && loginPassTextField.text == pass
                  {
-                     performSegue(withIdentifier: "signintohome", sender: self)
-                           print("SIgned In Succesfully")
+                    
+                   //  UserDefaults.standard.setValueForLogin(value: true)
+//                    let vc: MainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//                    self.navigationController?.pushViewController(vc, animated: true)
+              
+                    performSegue(withIdentifier: "signintohome", sender: self)
+                    
+                    print("SIgned In Succesfully")
                  }
                  else{
                      var message = ""
@@ -93,4 +92,13 @@ class signInViewController: UIViewController,UITextFieldDelegate {
     }
     
     
+}
+extension signInViewController{
+    func buttonWork(){
+        signInButton.layer.borderColor = UIColor.green.cgColor
+        signInButton.layer.borderWidth = 2
+        signInButton.layer.cornerRadius = 20
+       
+        
+    }
 }

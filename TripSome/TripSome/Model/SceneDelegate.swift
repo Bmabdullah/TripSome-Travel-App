@@ -17,8 +17,68 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        checkLogin()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
+    
+    
+   
+        func checkLogin() {
+            
+//            if let userdefault = UserDefaults.standard.getValueofLogin(){
+//
+//                print("hello badon",userdefault)
+//
+//                if userdefault == true{
+//
+//               let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    guard let rootVC = storyboard.instantiateViewController(identifier: "MainViewController") as? MainViewController else {
+//                        print("ViewController not found")
+//                        return
+//                    }
+//                    let rootNC = UINavigationController(rootViewController: rootVC)
+//                    self.window?.rootViewController = rootNC
+//                    self.window?.makeKeyAndVisible()
+//                }
+//
+//            }
+            
+            let defaults = UserDefaults.standard
+                
+                if defaults.bool(forKey: "First Launch") == true {
+                    
+                    defaults.set(true, forKey: "First Launch")
+                    
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    guard let rootVC = storyboard.instantiateViewController(identifier: "MainViewController") as? MainViewController else {
+                        print("ViewController not found")
+                        return
+                    }
+                    let rootNC = UINavigationController(rootViewController: rootVC)
+                    self.window?.rootViewController = rootNC
+                    self.window?.makeKeyAndVisible()
+                    
+                } else {
+                    
+                    print("Login View")
+                    
+                    // Run Code During First Launch
+                    defaults.set(true, forKey: "First Launch")
+                
+            
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    guard let rootVC = storyboard.instantiateViewController(identifier: "signInViewController") as? signInViewController else {
+                        print("ViewController not found")
+                        return
+                    }
+                    let rootNC = UINavigationController(rootViewController: rootVC)
+                    self.window?.rootViewController = rootNC
+                    self.window?.makeKeyAndVisible()
+            
+        }
+    }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

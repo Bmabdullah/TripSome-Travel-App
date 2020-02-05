@@ -8,12 +8,24 @@
 
 import UIKit
 
-class signUpViewController: UIViewController {
+class signUpViewController: UIViewController,UITextFieldDelegate {
 
+    //outlets
+    
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // deleget text field
+        TextFieldDeligate()
+        
+        userNameTextField.becomeFirstResponder()
+        
         buttonwork()
     }
 
@@ -23,8 +35,28 @@ class signUpViewController: UIViewController {
    
     @IBAction func signInPageButton(_ sender: Any) {
         
-        performSegue(withIdentifier: "signuptosignin", sender: self)
+       // performSegue(withIdentifier: "signuptosignin", sender: self)
+        self.dismiss(animated: true, completion: nil)
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        //emailTextField.becomeFirstResponder()
+        if textField == userNameTextField{
+            emailTextField.becomeFirstResponder()
+        }
+        else if textField == emailTextField{
+            passwordTextField.becomeFirstResponder()
+        }
+        else if textField == passwordTextField{
+            confirmPasswordTextField.becomeFirstResponder()
+        }
+        else if textField == confirmPasswordTextField{
+            signUpButtonAction()
+        }
+        return false
+    }
+    
+    
     
   
     
@@ -35,6 +67,19 @@ extension signUpViewController{
     func buttonwork(){
           signUpButton.layer.borderColor = UIColor.green.cgColor
           signUpButton.layer.borderWidth = 2
-          signUpButton.layer.cornerRadius = 30
+          signUpButton.layer.cornerRadius = 20
       }
+   
+    func TextFieldDeligate(){
+        self.userNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.confirmPasswordTextField.delegate = self
+    }
+// signup action
+    
+    func signUpButtonAction(){
+           
+       }
+    
 }

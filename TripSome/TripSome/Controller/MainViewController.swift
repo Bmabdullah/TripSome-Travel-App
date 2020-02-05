@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     @IBOutlet var mainView: UIView!
+    var window: UIWindow?
     
     //humburger menu
     @IBOutlet weak var hiddenView: UIView!
@@ -31,7 +32,7 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
     @IBOutlet weak var signOutButton: UIButton!
     
     // page control
-
+    
     @IBOutlet weak var divitionCOllectionView: UICollectionView!
     
     // Variables
@@ -70,8 +71,8 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         sideMenu()
         navigationDesign()
     }
-  
-
+    
+    
     @IBAction func tapNavButton(_ sender: Any) {
         
         if hiddenView.isHidden == true{
@@ -81,25 +82,25 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
             hiddenView.isHidden = true
         }
     }
-
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-            let noOfCellsInRow = 2
-
-            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-
-            let totalSpace = flowLayout.sectionInset.left
-                + flowLayout.sectionInset.right
-                + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
-
-            let size = Int((divitionCOllectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-            let hsize = Int((divitionCOllectionView.bounds.height - totalSpace) / 4)
-
-            return CGSize(width: size, height: hsize)
-
         
-
+        let noOfCellsInRow = 2
+        
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        
+        let totalSpace = flowLayout.sectionInset.left
+            + flowLayout.sectionInset.right
+            + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+        
+        let size = Int((divitionCOllectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+        let hsize = Int((divitionCOllectionView.bounds.height - totalSpace) / 4)
+        
+        return CGSize(width: size, height: hsize)
+        
+        
+        
     }
     
     
@@ -122,23 +123,24 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         
     }
     
+    
     //cell data sending in collectionview
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var mycustomCell = UICollectionViewCell()
-  
-            let cell:DivitionCollectionViewCell = divitionCOllectionView.dequeueReusableCell(withReuseIdentifier:"DivitionCollectionViewCell", for: indexPath) as! DivitionCollectionViewCell
-           // cell.divisionCollectionCellConfigure(with modelobj[indexPath.row])
-            cell.divitionImageView.image = imgArr[indexPath.row]
-            cell.divitionNameLabel.text = divNameArr[indexPath.row]
-            //    cell.totalPlaceLabel.text = "\(divNameArr[indexPath.row].count) Places > "
-            cell.contentView.layer.cornerRadius = 10
-      
-         
-            cell.totalPlaceLabel.text = "\(divitionCounter[indexPath.row]) Places > "
-            
-           mycustomCell = cell
-           return mycustomCell
+        
+        let cell:DivitionCollectionViewCell = divitionCOllectionView.dequeueReusableCell(withReuseIdentifier:"DivitionCollectionViewCell", for: indexPath) as! DivitionCollectionViewCell
+        // cell.divisionCollectionCellConfigure(with modelobj[indexPath.row])
+        cell.divitionImageView.image = imgArr[indexPath.row]
+        cell.divitionNameLabel.text = divNameArr[indexPath.row]
+        //    cell.totalPlaceLabel.text = "\(divNameArr[indexPath.row].count) Places > "
+        cell.contentView.layer.cornerRadius = 10
+        
+        
+        cell.totalPlaceLabel.text = "\(divitionCounter[indexPath.row]) Places > "
+        
+        mycustomCell = cell
+        return mycustomCell
         
         
     }
@@ -164,7 +166,24 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
     }
-
+    
+    
+    
+    let defaults = UserDefaults.standard
+    
+    @IBAction func signOutButton(_ sender: Any) {
+        
+        //navigationController?.popToRootViewController(animated: true)
+        //signInViewController()
+        self.dismiss(animated: false, completion: nil)
+        
+        defaults.set(false, forKey: "First Launch")
+        performSegue(withIdentifier: "signOut", sender: self)
+        
+        print("Logged Out")
+        
+    }
+    
 }
 
 
