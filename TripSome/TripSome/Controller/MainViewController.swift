@@ -60,7 +60,7 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         //humburger menu
         hiddenView.isHidden = true
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
@@ -178,7 +178,11 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         self.dismiss(animated: false, completion: nil)
         
         defaults.set(false, forKey: "First Launch")
-        performSegue(withIdentifier: "signOut", sender: self)
+        
+       // performSegue(withIdentifier: "signOut", sender: self)
+        
+        let vc = self.storyboard?.instantiateViewController(identifier: "signInViewController") as! signInViewController
+        self.navigationController?.pushViewController(vc, animated: false)
         
         print("Logged Out")
         

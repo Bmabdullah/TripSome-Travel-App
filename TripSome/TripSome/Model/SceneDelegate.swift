@@ -24,24 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
    
         func checkLogin() {
-            
-//            if let userdefault = UserDefaults.standard.getValueofLogin(){
-//
-//                print("hello badon",userdefault)
-//
-//                if userdefault == true{
-//
-//               let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                    guard let rootVC = storyboard.instantiateViewController(identifier: "MainViewController") as? MainViewController else {
-//                        print("ViewController not found")
-//                        return
-//                    }
-//                    let rootNC = UINavigationController(rootViewController: rootVC)
-//                    self.window?.rootViewController = rootNC
-//                    self.window?.makeKeyAndVisible()
-//                }
-//
-//            }
+  
             
             let defaults = UserDefaults.standard
                 
@@ -59,25 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.window?.rootViewController = rootNC
                     self.window?.makeKeyAndVisible()
                     
-                } else {
-                    
-                    print("Login View")
-                    
-                    // Run Code During First Launch
-                    defaults.set(true, forKey: "First Launch")
-                
-            
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    guard let rootVC = storyboard.instantiateViewController(identifier: "signInViewController") as? signInViewController else {
-                        print("ViewController not found")
-                        return
-                    }
-                    let rootNC = UINavigationController(rootViewController: rootVC)
-                    self.window?.rootViewController = rootNC
-                    self.window?.makeKeyAndVisible()
-            
-        }
-    }
+                }
+
 
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -110,4 +76,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
+}
