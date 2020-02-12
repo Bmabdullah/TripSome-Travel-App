@@ -15,8 +15,20 @@ class DivitionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var totalPlaceLabel: UILabel!
     @IBOutlet weak var cellView: UIView!
     
-   // func divisionCollectionCellConfigure(with json:ModelName) {
-//      
-//    }
+    
+    
+    func configuredivitionData(with json:DivitionBase){
+        let imageURL = URL(string: "\(json.divimage ?? "")")
+        //print(imageURL)
+        ImageService.downloadImage(url: imageURL!) { image in
+            
+            self.divitionImageView.image = image
+        }
+        divitionNameLabel.text = json.divname ?? ""
+        print(json.divname ?? "")
+        //totalPlaceLabel.text = json.
+        
+    }
+
     
 }

@@ -26,5 +26,17 @@ class PlacesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
         
     }
+    func configurePlaceData(with json:placesBase){
+       // let imageURL = URL(string: "\(json.pimage ?? "")")
+        //print(imageURL)
+       // ImageService.downloadImage(url: imageURL!) { image in
+            
+           // self.placeImageView.image = image
+       // }
+        placeNameLabel.text = json.pname ?? ""
+        print(json.pname ?? "")
+        //totalPlaceLabel.text = json.
+        
+    }
 
 }

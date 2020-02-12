@@ -11,7 +11,7 @@ import UIKit
 class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     
-
+    var arrayPlaces = [placesBase]()
     
     @IBOutlet weak var placeTableView: UITableView!
     
@@ -38,11 +38,13 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         placeTableView.delegate = self
         placeTableView.dataSource = self
         
-        arrayChange()
+       // arrayChange()
         
         //placeTableView.estimatedRowHeight = 500
        // placeTableView.rowHeight = UITableView.automaticDimension
         self.navigationItem.title = "\(receved)"
+        
+        getPlaceName()
     
     }
     
@@ -63,15 +65,18 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         
-        arr.count
+        arrayPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = placeTableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as! PlacesTableViewCell
         
-        cell.placeNameLabel.text = arr[indexPath.row]
-            cell.placeImageView.image = imgArr[indexPath.row]
         
+        cell.configurePlaceData(with: self.arrayPlaces[indexPath.row])
+//
+//        cell.placeNameLabel.text = arr[indexPath.row]
+//            cell.placeImageView.image = imgArr[indexPath.row]
+//
         tableIndexforColor = Int(indexPath.row)
         if tableIndexforColor % 2 == 0{
             cell.layer.backgroundColor = UIColor.lightText.cgColor
@@ -98,21 +103,75 @@ class PlaceViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                tableView.deselectRow(at: indexPath, animated: true)
+        
                if selectedIndex != indexPath.row{
                    self.iscolupse = true
                 print(1)
                }
                else{
                    self.iscolupse = true
-                        let vc = storyboard?.instantiateViewController(identifier: "DetailsViewController") as! DetailsViewController
+//                        let vc = storyboard?.instantiateViewController(identifier: "DetailsViewController") as! DetailsViewController
                 
-                         self.navigationController?.pushViewController(vc, animated: false)
-                        vc.receved = arr[indexPath.row]
-                print(2)
+                        let vc = storyboard?.instantiateViewController(identifier: "placeDetailsTableViewController") as! placeDetailsTableViewController
+                self.navigationController?.pushViewController(vc, animated: false)
+                
+                vc.name = arrayPlaces[indexPath.row].pname ?? ""
+                vc.location = arrayPlaces[indexPath.row].plocation ?? ""
+                vc.intro = arrayPlaces[indexPath.row].pinfo ?? ""
+                vc.history = arrayPlaces[indexPath.row].phistory ?? ""
+                
                }
                self.selectedIndex = indexPath.row
                tableView.reloadRows(at: [indexPath], with: .automatic)
            }
 
 
+}
+
+extension PlaceViewController{
+    func getPlaceName(){
+      //  let token = "3790d5bf65170dccbd1a3bc2669925d6bd2072ae"
+        
+        guard let url = URL(string: "http://127.0.0.1:8000/palces/api/v1/list") else { return }
+        var request = URLRequest(url: url)
+        
+        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("token \(TokenUrl.shared.token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        //request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let allData = data {
+          
+                do {
+                    let responseModel = try? JSONDecoder().decode([placesBase].self, from: allData)
+                   
+                    print(responseModel)
+                    
+                    
+                    DispatchQueue.main.async {
+                        
+                      
+                        for response in responseModel!{
+                            self.arrayPlaces.append(response)
+                        }
+                      
+                    self.placeTableView.reloadData()
+                    }
+                    
+                }
+                catch {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                
+                
+            }
+                          
+        }.resume()
+        
+        
+    }
 }

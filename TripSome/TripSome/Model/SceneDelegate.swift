@@ -14,30 +14,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
         checkLogin()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
-    
-    
+    let signin = signInViewController()
    
         func checkLogin() {
   
             
             let defaults = UserDefaults.standard
+            let tokenSave = UserDefaults.standard
                 
-                if defaults.bool(forKey: "First Launch") == true {
+                if defaults.bool(forKey: "First Launch") == true  {
                     
                     defaults.set(true, forKey: "First Launch")
-                    
+                    TokenUrl.shared.token = UserDefaults.standard.string(forKey: "saveToken") ?? ""
+//                    tokenSave.set(signin.tt, forKey: "token save")
+//                    TokenUrl.shared.token = signin.tt
                     
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     guard let rootVC = storyboard.instantiateViewController(identifier: "MainViewController") as? MainViewController else {
                         print("ViewController not found")
                         return
                     }
+                    
                     let rootNC = UINavigationController(rootViewController: rootVC)
                     self.window?.rootViewController = rootNC
                     self.window?.makeKeyAndVisible()

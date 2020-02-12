@@ -31,32 +31,18 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
     @IBOutlet weak var aboutButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
     
-    // page control
-    
     @IBOutlet weak var divitionCOllectionView: UICollectionView!
     
-    // Variables
-    var imgArr = [#imageLiteral(resourceName: "Rectangle 19"),#imageLiteral(resourceName: "Rectangle 14"),#imageLiteral(resourceName: "Rectangle 15"),#imageLiteral(resourceName: "Rectangle 14"),#imageLiteral(resourceName: "Rectangle 18"),#imageLiteral(resourceName: "Rectangle 11"),#imageLiteral(resourceName: "Rectangle 17"),#imageLiteral(resourceName: "Rectangle 13")]
-    var divNameArr = ["Barishal","Chittagong","Dhaka","Khulna","Rajshahi","Sylhet","Rangpur","Mymensingh"]      // array for divition name label
-    // divition wise global array
     
-    var dhaka = ["ahsan monjil","sonarga","jatiyo songsodh","zoo","savar"]
-    var sylhet = ["majar","tea garden","lakkatura hill","eco park","tanguar hawr","srimangal","lawachora"]
-    var rangpur = ["ahsan monjil","sonarga","jatiyo songsodh","zoo","savar"]
-    var chittagonj = ["majar","tea garden","lakkatura hill","eco park","tanguar hawr","srimangal","lawachora"]
-    var mymensingh = ["ahsan monjil","sonarga","jatiyo songsodh","zoo","savar"]
-    var rajshahi = ["majar","tea garden","lakkatura hill","eco park","tanguar hawr","srimangal","lawachora"]
-    var khulna = ["ahsan monjil","sonarga","jatiyo songsodh","zoo","savar"]
-    var barishal:[String] = ["majar","tea garden", "jfdhg"]
+    //var datajson = [LoginRequestModel]()
+    var array_divition = [DivitionBase]()
+    var t = TokenUrl()
+    
+ 
     
     var divitionCounter = ["7","5","6","3","10","20","10","5"]
     
-    // variables for counter
-    var timer = Timer()
-    var counter = 0
-    var index = 0
-    
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -70,6 +56,8 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         //side menu function call
         sideMenu()
         navigationDesign()
+        getdivitionname()
+        
     }
     
     
@@ -99,27 +87,22 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         return CGSize(width: size, height: hsize)
         
-        
-        
     }
-    
     
     //number of item in collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArr.count
+        return array_divition.count
     }
-    
     
     // collectionview selected item
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
-        if collectionView == divitionCOllectionView{
             let vc = storyboard?.instantiateViewController(identifier: "PlaceViewController") as! PlaceViewController
             
             self.navigationController?.pushViewController(vc, animated: true)
-            vc.receved = divNameArr[indexPath.row]
-        }
+        vc.receved = array_divition[indexPath.row].divname ?? ""
+       
         
     }
     
@@ -130,14 +113,15 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
         var mycustomCell = UICollectionViewCell()
         
         let cell:DivitionCollectionViewCell = divitionCOllectionView.dequeueReusableCell(withReuseIdentifier:"DivitionCollectionViewCell", for: indexPath) as! DivitionCollectionViewCell
-        // cell.divisionCollectionCellConfigure(with modelobj[indexPath.row])
-        cell.divitionImageView.image = imgArr[indexPath.row]
-        cell.divitionNameLabel.text = divNameArr[indexPath.row]
-        //    cell.totalPlaceLabel.text = "\(divNameArr[indexPath.row].count) Places > "
+ 
+            cell.configuredivitionData(with: self.array_divition[indexPath.row])
+     
+        cell.totalPlaceLabel.text = "\(divitionCounter[indexPath.row].count) Places > "
         cell.contentView.layer.cornerRadius = 10
         
         
-        cell.totalPlaceLabel.text = "\(divitionCounter[indexPath.row]) Places > "
+        //cell.totalPlaceLabel.text = "\(divitionCounter[indexPath.row]) Places > "
+      //  divitionCOllectionView.reloadData()
         
         mycustomCell = cell
         return mycustomCell
@@ -158,8 +142,8 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
     func sideMenu(){
         profileImageView.layer.cornerRadius = 60
         bangladeshButton.layer.cornerRadius = 20
-        visitedPlaceButton.layer.borderColor = UIColor.red.cgColor
-        visitedPlaceButton.layer.borderWidth = 2
+        //        visitedPlaceButton.layer.borderColor = UIColor.red.cgColor
+        //        visitedPlaceButton.layer.borderWidth = 2
     }
     func navigationDesign(){
         navigationController?.navigationBar.barTintColor = UIColor.systemGreen
@@ -173,13 +157,11 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
     
     @IBAction func signOutButton(_ sender: Any) {
         
-        //navigationController?.popToRootViewController(animated: true)
-        //signInViewController()
         self.dismiss(animated: false, completion: nil)
         
         defaults.set(false, forKey: "First Launch")
         
-       // performSegue(withIdentifier: "signOut", sender: self)
+        // performSegue(withIdentifier: "signOut", sender: self)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "signInViewController") as! signInViewController
         self.navigationController?.pushViewController(vc, animated: false)
@@ -189,6 +171,54 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UICollection
     }
     
 }
+
+extension MainViewController{
+    
+    func getdivitionname(){
+        
+       // let token = "3790d5bf65170dccbd1a3bc2669925d6bd2072ae"
+        
+        guard let url = URL(string: "http://127.0.0.1:8000/division_data/api/v1/onlylist") else { return }
+        var request = URLRequest(url: url)
+        
+        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      // request.addValue("token 3790d5bf65170dccbd1a3bc2669925d6bd2072ae", forHTTPHeaderField: "Authorization")
+        request.addValue("token \(TokenUrl.shared.token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        //request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let allData = data {
+                do {
+                    let responseModel = try? JSONDecoder().decode([DivitionBase].self, from: allData)
+    
+                    DispatchQueue.main.async {
+                        
+                      
+                        for response in responseModel!{
+                            self.array_divition.append(response)
+                        }
+                      
+                     self.divitionCOllectionView.reloadData()
+                    }
+                    
+                }
+                catch {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                
+                
+            }
+                          
+        }.resume()
+        
+        
+    }
+}
+
+
 
 
 
